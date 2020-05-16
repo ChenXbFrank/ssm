@@ -9,10 +9,10 @@ CREATE TABLE `book` (
 -- 初始化图书数据
 INSERT INTO `book` (`book_id`, `name`, `number`)
 VALUES
-	(1000, 'Java程序设计', 10),
-	(1001, '数据结构', 10),
-	(1002, '设计模式', 10),
-	(1003, '编译原理', 10);
+	(1000, '多线程开发', 10),
+	(1001, '高并发处理', 10),
+	(1002, '面向对象程序设计', 10),
+	(1003, 'Mysql事务处理', 10);
 
 -- 创建预约图书表
 CREATE TABLE `appointment` (
@@ -22,3 +22,4 @@ CREATE TABLE `appointment` (
   PRIMARY KEY (`book_id`, `student_id`),
   INDEX `idx_appoint_time` (`appoint_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='预约图书表';
+
