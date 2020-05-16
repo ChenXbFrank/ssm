@@ -54,10 +54,10 @@ public class BookController {
 	}
 
 	// ajax json
-	@RequestMapping(value = "/{bookId}/appoint", method = RequestMethod.POST, produces = {
+	@RequestMapping(value = "/appoint", method = RequestMethod.POST, produces = {
 			"application/json; charset=utf-8" })
 	@ResponseBody
-	private Result<AppointExecution> appoint(@PathVariable("bookId") Long bookId, @RequestParam("studentId") Long studentId) {
+	private Result<AppointExecution> appoint(@RequestParam("bookId") Long bookId, @RequestParam("studentId") Long studentId) {
 		if (studentId == null || studentId.equals("")) {
 			return new Result<AppointExecution>(false, "学号不能为空");
 		}
