@@ -22,7 +22,7 @@ import com.cxb.ssm.dto.Result;
 import com.cxb.ssm.enums.AppointStateEnum;
 
 @Controller
-@RequestMapping("/book") // url:/模块/资源/{id}/细分 /seckill/list
+@RequestMapping("/book")
 public class BookController {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
