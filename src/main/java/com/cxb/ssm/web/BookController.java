@@ -1,6 +1,7 @@
 package com.cxb.ssm.web;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.cxb.ssm.entity.Book;
 import com.cxb.ssm.exception.NoNumberException;
@@ -9,6 +10,7 @@ import com.cxb.ssm.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +37,7 @@ public class BookController {
 		List<Book> list = bookService.getList();
 		model.addAttribute("list", list);
 		logger.info("获取所有的图书{};", list);
-		// list.jsp + model = ModelAndView
-		return "list";// WEB-INF/jsp/"list".jsp
+		return "list";
 	}
 
 	@RequestMapping(value = "/detail/{bookId}", method = RequestMethod.GET)
@@ -72,6 +73,26 @@ public class BookController {
 			execution = new AppointExecution(bookId, AppointStateEnum.INNER_ERROR);
 		}
 		return new Result<AppointExecution>(true, execution);
+	}
+
+	@Autowired
+	private RedisTemplate redisTemplate;
+	/**
+	 * 这里就是测试redis
+	 */
+	@RequestMapping(value = "/redis", method = RequestMethod.GET)
+	private String redis(Model model) {
+		Book book = (Book) redisTemplate.opsForValue().get("book");
+		if (book == null){
+			book = bookService.getById(1001);
+			logger.info("从数据库获取id为1001的图书{};", book);
+			// 将数据设置到缓存中 30秒的有效期
+			redisTemplate.opsForValue().set("book",book,30, TimeUnit.SECONDS);
+		}else {
+			logger.info("从redis缓存中获取id为1001的图书{};", book);
+		}
+		model.addAttribute("book", book);
+		return "detail";
 	}
 
 }

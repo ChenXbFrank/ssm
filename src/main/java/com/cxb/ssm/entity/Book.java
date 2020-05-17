@@ -1,9 +1,11 @@
 package com.cxb.ssm.entity;
 
+import java.io.Serializable;
+
 /**
  * 图书实体
  */
-public class Book {
+public class Book implements Serializable {
 
 	private long bookId;// 图书ID
 

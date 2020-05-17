@@ -1,11 +1,12 @@
 package com.cxb.ssm.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 预约图书实体
  */
-public class Appointment {
+public class Appointment implements Serializable {
 
 	private long bookId;// 图书ID
 

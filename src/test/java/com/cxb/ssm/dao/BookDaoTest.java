@@ -23,10 +23,10 @@ public class BookDaoTest extends BaseTest {
 	@Test
 	public void testQueryAll() throws Exception {
 		List<Book> books = bookDao.queryAll(0, 4);
-//		for (Book book : books) {
-//			System.out.println(book);
-//		}
-		books.forEach((book) -> System.out.println(book));
+		for (Book book : books) {
+			System.out.println(book);
+		}
+//		books.forEach((book) -> System.out.println(book));
 	}
 
 	@Test
