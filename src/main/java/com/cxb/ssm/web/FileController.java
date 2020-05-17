@@ -114,11 +114,11 @@ public class FileController {
 			transport.connect(mailserver, sender, password);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
-			out.print("<script>alert('邮件已发送！');window.location.href='Index.jsp';</script>");
+			out.print("<script>alert('邮件已发送！');window.location.href='ok.jsp';</script>");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("发送邮件产生的错误：" + e.getMessage());
-			out.print("<script>alert('邮件发送失败！');window.location.href='Index.jsp';</script>");
+			out.print("<script>alert('邮件发送失败！');window.location.href='error.jsp';</script>");
 		}
 	}
 }
