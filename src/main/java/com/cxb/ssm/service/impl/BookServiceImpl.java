@@ -58,7 +58,7 @@ public class BookServiceImpl implements BookService {
 			} else {
 				// 执行预约操作
 				int insert = appointmentDao.insertAppointment(bookId, studentId);
-				int i = 1/0 ;
+//				int i = 1/0 ; // 这里是演示出错时，库存不会修改
 				if (insert <= 0) {// 重复预约
 					throw new RepeatAppointException("repeat appoint");
 				} else {// 预约成功
