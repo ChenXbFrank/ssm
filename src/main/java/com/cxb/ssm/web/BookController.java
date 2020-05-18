@@ -95,4 +95,19 @@ public class BookController {
 		return "detail";
 	}
 
+	@RequestMapping(value = "/redisList", method = RequestMethod.GET)
+	private String redisList(Model model) {
+		List<Book> list = (List<Book>) redisTemplate.opsForValue().get("book_list");
+		if (list == null){
+			list = bookService.getList();
+			logger.info("从数据库获取所有的图书{};", list);
+			// 将数据设置到缓存中 30秒的有效期
+			redisTemplate.opsForValue().set("book_list",list,30, TimeUnit.SECONDS);
+		}else {
+			logger.info("从redis缓存中获取所有的图书{};", list);
+		}
+		model.addAttribute("list", list);
+		return "list";
+	}
+
 }
