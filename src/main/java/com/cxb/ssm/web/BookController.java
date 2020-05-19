@@ -54,6 +54,13 @@ public class BookController {
 		return "detail";
 	}
 
+	@RequestMapping(value = "/getBookById", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	private Book getBookName(@RequestParam("bookId") Long bookId) {
+		Book book = bookService.getById(bookId);
+		return book;
+	}
+
 	// ajax json
 	@RequestMapping(value = "/appoint", method = RequestMethod.POST, produces = {
 			"application/json; charset=utf-8" })
